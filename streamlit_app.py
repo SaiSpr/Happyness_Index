@@ -131,7 +131,7 @@ df = pd.read_csv("df_final.csv")
 
 # adding title and text in the app
 
-st.sidebar.title("World Happiness Index 2021:")
+st.sidebar.title("World Happiness Report:")
 
 country_list = ["All","Western Europe", "South Asia", "Southeast Asia", "East Asia", "North America and ANZ","Middle East and North Africa", "Latin America and Caribbean","Central and Eastern Europe","Commonwealth of Independent States","Sub-Saharan Africa"] 
 select = st.sidebar.selectbox('Filter the region here:', country_list, key='1')
@@ -184,3 +184,23 @@ ax.set_xticklabels(
     horizontalalignment='right'
 );
 st.pyplot(fig1)
+
+
+
+
+# Create a title for the dashboard
+st.title("World Happiness Index Map")
+
+# Create a map centered on the world
+m = folium.Map(location=[0, 0], zoom_start=2)
+
+# Add a marker for each country in the data
+for i in range(len(data)):
+    lat = data.loc[i, "Latitude"]
+    lon = data.loc[i, "Longitude"]
+    name = data.loc[i, "Country"]
+    score = data.loc[i, "Happiness_Score"]
+    folium.Marker([lat, lon], popup=f"{name}: {score}").add_to(m)
+
+# Display the map
+st.write(m._repr_html_(), unsafe_allow_html=True)
