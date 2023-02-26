@@ -89,10 +89,10 @@ geolocator = Nominatim(user_agent="streamlit")
 m = folium.Map(location=[0, 0], zoom_start=2)
 
 # # Add a marker for each country in the data
-for i in range(len(data)):
-     country = data.loc[i, "Country"]
-     st.title("country")
-     location = geolocator.geocode(country)
+for i in data.Country:
+#      country = data.loc[i, "Country"]
+#      st.title("country")
+     location = geolocator.geocode(i)
      if location is not None:
          lat = location.latitude
          lon = location.longitude
