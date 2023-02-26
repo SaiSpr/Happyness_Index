@@ -146,7 +146,7 @@ df = df[df['Happiness_Score'] <= score] # Filtering the dataframe.
 
 
 
-st.image("Happiness_Score", caption='World Happiness Report')
+st.image("world-happiness-report.jpg", caption='World Happiness Report')
 
 #print dataframe
 st.write(filtered_df)
