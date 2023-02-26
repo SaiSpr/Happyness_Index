@@ -188,8 +188,8 @@ st.pyplot(fig1)
 
 
 
-import folium
-from geopy.geocoders import Nominatim
+# import folium
+# from geopy.geocoders import Nominatim
 
 # # Load the World Happiness Index data
 # data = pd.read_csv("df_final.csv")
@@ -197,8 +197,8 @@ from geopy.geocoders import Nominatim
 # Create a title for the dashboard
 st.title("World Happiness Index Map")
 
-# Create a geolocator object
-geolocator = Nominatim(user_agent="streamlit")
+# # Create a geolocator object
+# geolocator = Nominatim(user_agent="streamlit")
 
 # # Create a map centered on the world
 # m = folium.Map(location=[0, 0], zoom_start=2)
