@@ -188,19 +188,30 @@ st.pyplot(fig1)
 
 
 
+import folium
+from geopy.geocoders import Nominatim
+
+# Load the World Happiness Index data
+data = pd.read_csv("df_final.csv")
+
 # Create a title for the dashboard
 st.title("World Happiness Index Map")
+
+# Create a geolocator object
+geolocator = Nominatim(user_agent="streamlit")
 
 # Create a map centered on the world
 m = folium.Map(location=[0, 0], zoom_start=2)
 
 # Add a marker for each country in the data
 for i in range(len(data)):
-    lat = data.loc[i, "Latitude"]
-    lon = data.loc[i, "Longitude"]
-    name = data.loc[i, "Country"]
-    score = data.loc[i, "Happiness_Score"]
-    folium.Marker([lat, lon], popup=f"{name}: {score}").add_to(m)
+    country = data.loc[i, "Country name"]
+    location = geolocator.geocode(country)
+    if location is not None:
+        lat = location.latitude
+        lon = location.longitude
+        score = data.loc[i, "Ladder score"]
+        folium.Marker([lat, lon], popup=f"{country}: {score}").add_to(m)
 
 # Display the map
 st.write(m._repr_html_(), unsafe_allow_html=True)
