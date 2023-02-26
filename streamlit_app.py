@@ -88,15 +88,16 @@ geolocator = Nominatim(user_agent="streamlit")
 # # Create a map centered on the world
 m = folium.Map(location=[0, 0], zoom_start=2)
 
-# # # Add a marker for each country in the data
-# for i in range(len(data)):
-#      country = data.loc[i, "Country"]
-#      location = geolocator.geocode(country)
-#      if location is not None:
-#          lat = location.latitude
-#          lon = location.longitude
-#          score = data.loc[i, "Happiness_Score"]
-#          folium.Marker([lat, lon], popup=f"{country}: {score}").add_to(m)
+# # Add a marker for each country in the data
+for i in range(len(data)):
+     country = data.loc[i, "Country"]
+     st.title("country")
+     location = geolocator.geocode(country)
+     if location is not None:
+         lat = location.latitude
+         lon = location.longitude
+         score = data.loc[i, "Happiness_Score"]
+         folium.Marker([lat, lon], popup=f"{country}: {score}").add_to(m)
        
 import plotly.express as px
 
