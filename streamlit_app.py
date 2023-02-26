@@ -187,12 +187,12 @@ st.pyplot(fig1)
 
 
 
-pip install streamlit-folium
+
 import folium
 from geopy.geocoders import Nominatim
 
-# Load the World Happiness Index data
-data = pd.read_csv("df_final.csv")
+# # Load the World Happiness Index data
+# data = pd.read_csv("df_final.csv")
 
 # Create a title for the dashboard
 st.title("World Happiness Index Map")
@@ -200,18 +200,26 @@ st.title("World Happiness Index Map")
 # Create a geolocator object
 geolocator = Nominatim(user_agent="streamlit")
 
-# Create a map centered on the world
-m = folium.Map(location=[0, 0], zoom_start=2)
+# # Create a map centered on the world
+# m = folium.Map(location=[0, 0], zoom_start=2)
 
-# Add a marker for each country in the data
-for i in range(len(data)):
-    country = data.loc[i, "Country name"]
-    location = geolocator.geocode(country)
-    if location is not None:
-        lat = location.latitude
-        lon = location.longitude
-        score = data.loc[i, "Ladder score"]
-        folium.Marker([lat, lon], popup=f"{country}: {score}").add_to(m)
+# # Add a marker for each country in the data
+# for i in range(len(data)):
+#     country = data.loc[i, "Country name"]
+#     location = geolocator.geocode(country)
+#     if location is not None:
+#         lat = location.latitude
+#         lon = location.longitude
+#         score = data.loc[i, "Ladder score"]
+#         folium.Marker([lat, lon], popup=f"{country}: {score}").add_to(m)
+       
+import plotly.express as px
+
+fig = px.scatter_mapbox(df, lat="latitude", lon="longitude", hover_name='Country', zoom=3)
+
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+st.plotly_chart(fig)
 
 # Display the map
 st.write(m._repr_html_(), unsafe_allow_html=True)
