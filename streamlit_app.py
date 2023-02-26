@@ -60,32 +60,32 @@ df_filtered = df[df['Country'] == country]
 
 
 # Add a scatter plot to visualize the relationship between GDP per capita and Ladder score
-fig = px.scatter(df_filtered, x='Logged GDP per capita', y='Ladder score', color='Regional indicator', size='Population',
-                 hover_name='Country name', title=f'Happiness Index ({year})')
+fig = px.scatter(df_filtered, x='Economy', y='Happyness_Score', color='Region', size='Population',
+                 hover_name='Country', title=f'Happiness Index ({year})')
 st.plotly_chart(fig)
 
 # Add radio buttons to choose a variable to plot against the ladder score
-variable = st.sidebar.radio('Select a variable', ['Logged GDP per capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices'])
+variable = st.sidebar.radio('Select a variable', ['Economy', 'Family', 'Health', 'Freedom'])
 
 # Create a scatter plot
-fig = px.scatter(df_filtered, x=variable, y='Ladder score', color='Regional indicator', size='Population',
-                 hover_name='Country name', title=f'Happiness Index ({year})')
+fig = px.scatter(df_filtered, x=variable, y='Happyness_Score', color='Region', size='Population',
+                 hover_name='Country', title=f'Happiness Index ({year})')
 st.plotly_chart(fig)
 
-# Add a date range selector to filter the data by date
-start_date = st.sidebar.date_input('Start date', min_value=df['Date'].min(), max_value=df['Date'].max())
-end_date = st.sidebar.date_input('End date', min_value=df['Date'].min(), max_value=df['Date'].max(), value=df['Date'].max())
+# # Add a date range selector to filter the data by date
+# start_date = st.sidebar.date_input('Start date', min_value=df['Date'].min(), max_value=df['Date'].max())
+# end_date = st.sidebar.date_input('End date', min_value=df['Date'].min(), max_value=df['Date'].max(), value=df['Date'].max())
 
-# Filter the dataframe by date range
-df_filtered = df[(df['Date'] >= start_date) & (df['Date'] <= end_date)]
+# # Filter the dataframe by date range
+# df_filtered = df[(df['Date'] >= start_date) & (df['Date'] <= end_date)]
 
 
 # Add a color picker to change the color scheme of the visualization
 color_scheme = st.sidebar.color_picker('Select a color', value='#1f77b4')
 
 # Create a scatter plot with the selected color scheme
-fig = px.scatter(df_filtered, x='Logged GDP per capita', y='Ladder score', color='Regional indicator', size='Population',
-                 hover_name='Country name', title=f'Happiness Index ({year})', color_discrete_sequence=[color_scheme])
+fig = px.scatter(df_filtered, x='Economy', y='Happyness_Score', color='Region', size='Population',
+                 hover_name='Country', title=f'Happiness Index ({year})', color_discrete_sequence=[color_scheme])
 st.plotly_chart(fig)
 
 # Add a selectbox to choose a data column to display
@@ -95,11 +95,11 @@ column = st.sidebar.selectbox('Select a column', df.columns)
 st.write(df_filtered[[column]])
 
 # Add a checkbox group to choose countries to compare
-countries = st.sidebar.checkbox('Select countries to compare', options=df_filtered['Country name'].unique())
+countries = st.sidebar.checkbox('Select countries to compare', options=df_filtered['Country'].unique())
 
 # Display a line chart comparing the selected countries
 if countries:
-    fig = px.line(df_filtered[df_filtered['Country name'].isin(countries)], x='year', y='Ladder score', color='Country name',
+    fig = px.line(df_filtered[df_filtered['Country'].isin(countries)], x='Year', y='Happyness_Score', color='Country',
                   title=f'Happiness Index ({year}) - Comparison')
     st.plotly_chart(fig)
     
