@@ -39,24 +39,24 @@ def app():
        
        
 # Add a slider to filter the data by year
-year = st.sidebar.slider('Select a year', min_value=2015, max_value=2021, value=2021)
+year = st.sidebar.slider('Select a year', min_value=2015, max_value=2019, value=2019)
 
 # Filter the dataframe by year
-df_filtered = df[df['year'] == year]
+df_filtered = df[df['Year'] == year]
 
 
 # Add a checkbox to select multiple regions
-regions = st.sidebar.multiselect('Select regions', options=df['Regional indicator'].unique())
+regions = st.sidebar.multiselect('Select regions', options=df['Region'].unique())
 
 # Filter the dataframe by regions
-df_filtered = df[df['Regional indicator'].isin(regions)]
+df_filtered = df[df['Region'].isin(regions)]
 
 
 # Add a dropdown to select a specific country
-country = st.sidebar.selectbox('Select a country', options=df['Country name'].unique())
+country = st.sidebar.selectbox('Select a country', options=df['Country'].unique())
 
 # Filter the dataframe by country
-df_filtered = df[df['Country name'] == country]
+df_filtered = df[df['Country'] == country]
 
 
 # Add a scatter plot to visualize the relationship between GDP per capita and Ladder score
