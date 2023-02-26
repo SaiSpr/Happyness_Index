@@ -97,7 +97,7 @@ for i in data.Country:
          lat = location.latitude
          lon = location.longitude
          score = data["Happiness_Score"]
-         folium.Marker([lat, lon], popup=f"{country}: {score}").add_to(m)
+         folium.Marker([lat, lon], popup=f"{i}: {score}").add_to(m)
        
 import plotly.express as px
 
