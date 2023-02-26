@@ -72,40 +72,40 @@ st.pyplot(fig1)
 
 
 
-import geopy
-import folium
-from geopy.geocoders import Nominatim
+# import geopy
+# import folium
+# from geopy.geocoders import Nominatim
 
-# # Load the World Happiness Index data
-data = pd.read_csv("df_final.csv")
+# # # Load the World Happiness Index data
+# data = pd.read_csv("df_final.csv")
 
-# Create a title for the dashboard
-st.title("World Happiness Index Map")
+# # Create a title for the dashboard
+# st.title("World Happiness Index Map")
 
-# # Create a geolocator object
-geolocator = Nominatim(user_agent="streamlit")
+# # # Create a geolocator object
+# geolocator = Nominatim(user_agent="streamlit")
 
-# # Create a map centered on the world
-m = folium.Map(location=[0, 0], zoom_start=2)
+# # # Create a map centered on the world
+# m = folium.Map(location=[0, 0], zoom_start=2)
 
-# # Add a marker for each country in the data
-for i in data.Country:
-#      country = data.loc[i, "Country"]
-#      st.title("country")
-     location = geolocator.geocode(i)
-     if location is not None:
-         lat = location.latitude
-         lon = location.longitude
-         score = data["Happiness_Score"]
-         folium.Marker([lat, lon], popup=f"{i}: {score}").add_to(m)
+# # # Add a marker for each country in the data
+# for i in data.Country:
+# #      country = data.loc[i, "Country"]
+# #      st.title("country")
+#      location = geolocator.geocode(i)
+#      if location is not None:
+#          lat = location.latitude
+#          lon = location.longitude
+#          score = data["Happiness_Score"]
+#          folium.Marker([lat, lon], popup=f"{i}: {score}").add_to(m)
        
-import plotly.express as px
+# import plotly.express as px
 
-fig = px.scatter_mapbox(df, lat="latitude", lon="longitude", hover_name='Country', zoom=3)
+# fig = px.scatter_mapbox(df, lat="latitude", lon="longitude", hover_name='Country', zoom=3)
 
-fig.update_layout(mapbox_style="open-street-map")
-fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-st.plotly_chart(fig)
+# fig.update_layout(mapbox_style="open-street-map")
+# fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+# st.plotly_chart(fig)
 
-# Display the map
-st.write(m._repr_html_(), unsafe_allow_html=True)
+# # Display the map
+# st.write(m._repr_html_(), unsafe_allow_html=True)
