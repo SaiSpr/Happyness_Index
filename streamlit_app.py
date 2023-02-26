@@ -60,7 +60,7 @@ df_filtered = df[df['Country'] == country]
 
 
 # Add a scatter plot to visualize the relationship between GDP per capita and Ladder score
-fig = px.scatter(df_filtered, x='Economy', y='Happiness_Score', color='Region', 
+fig = px.scatter(df_filtered, x='Economy', y='Health', color='Region', size = 'Happiness_Score'
                  hover_name='Country', title=f'Happiness Index ({year})')
 st.plotly_chart(fig)
 
@@ -68,7 +68,7 @@ st.plotly_chart(fig)
 variable = st.sidebar.radio('Select a variable', ['Economy', 'Family', 'Health', 'Freedom'])
 
 # Create a scatter plot
-fig = px.scatter(df_filtered, x='Family', y='Happiness_Score', color='Region', size='Year', hover_name='Country', title=f'Happiness Index ({year})')
+fig = px.scatter(df_filtered, x='Family', y='Freedom', color='Region', size='Happiness_Score', hover_name='Country', title=f'Happiness Index ({year})')
 
 st.plotly_chart(fig)
 
@@ -84,7 +84,7 @@ st.plotly_chart(fig)
 color_scheme = st.sidebar.color_picker('Select a color', value='#1f77b4')
 
 # Create a scatter plot with the selected color scheme
-fig = px.scatter(df_filtered, x='Economy', y='Happiness_Score', color='Region', size='Population',
+fig = px.scatter(df_filtered, x='Economy', y='Trust', color='Region', size='Happiness_Score',
                  hover_name='Country', title=f'Happiness Index ({year})', color_discrete_sequence=[color_scheme])
 st.plotly_chart(fig)
 
