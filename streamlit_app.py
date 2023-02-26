@@ -60,7 +60,7 @@ df_filtered = df[df['Country'] == country]
 
 
 # Add a scatter plot to visualize the relationship between GDP per capita and Ladder score
-fig = px.scatter(df_filtered, x='Economy', y='Happyness_Score', color='Region', size='Year',
+fig = px.scatter(df_filtered, x='Economy', y='Happyness_Score', color='Region', 
                  hover_name='Country', title=f'Happiness Index ({year})')
 st.plotly_chart(fig)
 
