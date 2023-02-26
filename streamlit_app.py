@@ -187,7 +187,7 @@ st.pyplot(fig1)
 
 
 
-
+pip install streamlit-folium
 import folium
 from geopy.geocoders import Nominatim
 
