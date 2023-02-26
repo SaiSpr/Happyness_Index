@@ -139,28 +139,28 @@ select = st.sidebar.selectbox('Filter the region here:', country_list, key='1')
 if select =="All":
     filtered_df = df
 else:   
-    filtered_df = df[df['Regional indicator']==select]
+    filtered_df = df[df['Region']==select]
 
-score = st.sidebar.slider('Select min Ladder Score', min_value=5, max_value=10, value = 10) # Getting the input.
-df = df[df['Ladder score'] <= score] # Filtering the dataframe.
+score = st.sidebar.slider('Select min Happiness Score', min_value=5, max_value=10, value = 10) # Getting the input.
+df = df[df['Happiness_Score'] <= score] # Filtering the dataframe.
 
 
 
-st.image("https://images.pexels.com/photos/573259/pexels-photo-573259.jpeg?cs=srgb&dl=pexels-matheus-bertelli-573259.jpg&fm=jpg", caption='World Happiness Dataset')
+st.image("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hyderabaddccb.org%2Fworld-happiness-index%2F&psig=AOvVaw3nMcPUvX2Yy_VvUm3Afd_u&ust=1677532026305000&source=images&cd=vfe&ved=2ahUKEwimtr71i7T9AhXlQ2wGHVqEBvgQjRx6BAgAEAo", caption='World Happiness Report')
 
 #print dataframe
 st.write(filtered_df)
 
 fig = px.scatter(filtered_df,
-                x="Logged GDP per capita",
-                y="Healthy life expectancy",
-                size="Ladder score",
-                color="Regional indicator",
-                hover_name="Country name",
+                x="Economy",
+                y="Health",
+                size="Happiness_Score",
+                color="Region",
+                hover_name="Country",
                 size_max=10)
 st.write(fig)
 
-st.write(px.bar(filtered_df, y='Ladder score', x='Country name'))
+st.write(px.bar(filtered_df, y='Happiness_Score', x='Country'))
 
 #correlate data
 corr = filtered_df.corr()
