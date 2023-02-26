@@ -68,8 +68,8 @@ st.plotly_chart(fig)
 variable = st.sidebar.radio('Select a variable', ['Economy', 'Family', 'Health', 'Freedom'])
 
 # Create a scatter plot
-fig = px.scatter(df_filtered, x=variable, y='Happyness_Score', color='Region', size='Year',
-                 hover_name='Country', title=f'Happiness Index ({year})')
+fig = px.scatter(df_filtered, x='Family', y='Happyness_Score', color='Region', size='Year', hover_name='Country', title=f'Happiness Index ({year})')
+
 st.plotly_chart(fig)
 
 # # Add a date range selector to filter the data by date
