@@ -8,6 +8,8 @@ df_2017 = pd.read_csv('2017.csv')
 df_2018 = pd.read_csv('2018.csv')
 df_2019 = pd.read_csv('2019.csv')
 
+df = pd.read_csv('df_final.csv')
+
 def app():
     st.title('World Happiness Index Data')
     st.sidebar.title('Explore')
