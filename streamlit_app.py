@@ -205,12 +205,12 @@ m = folium.Map(location=[0, 0], zoom_start=2)
 
 # # Add a marker for each country in the data
 for i in range(len(data)):
-     country = data.loc[i, "Country name"]
+     country = data.loc[i, "Country"]
      location = geolocator.geocode(country)
      if location is not None:
          lat = location.latitude
          lon = location.longitude
-         score = data.loc[i, "Ladder score"]
+         score = data.loc[i, "Happiness_Score"]
          folium.Marker([lat, lon], popup=f"{country}: {score}").add_to(m)
        
 import plotly.express as px
