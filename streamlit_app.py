@@ -82,7 +82,7 @@ df_geo = pd.read_csv('df_final_geo.csv')
 
 # Create the map
 fig = px.scatter_mapbox(df_geo, lat='Latitude', lon='Longitude', hover_name='Country', hover_data=['Happiness.Rank', 'Happiness.Score'], color='Happiness.Score', size='Economy..GDP.per.Capita.', zoom=1, height=500)
-fig.update_layout(mapbox_style='carto-positron')
+fig.update_layout(mapbox_style='open-street-map')
 
 # Build the Streamlit app
 st.title('Happiness Index 2017 Map')
