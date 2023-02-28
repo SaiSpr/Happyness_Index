@@ -80,41 +80,6 @@ from geopy.geocoders import Nominatim
 # Load the data
 df_geo = pd.read_csv('df_final_geo.csv')
 
-# # # Clean and transform the data
-# # geolocator = Nominatim(user_agent="my_app")
-# # latitudes = []
-# # longitudes = []
-# # for country in df['Country']:
-# #     location = geolocator.geocode(country)
-# #     latitudes.append(location.latitude)
-# #     longitudes.append(location.longitude)
-
-
-# # Clean and transform the data
-# geolocator = Nominatim(user_agent="my_app", timeout=10)
-# latitudes = []
-# longitudes = []
-# for country in df['Country']:
-#     location = None
-#     retries = 3
-#     while location is None and retries > 0:
-#         try:
-#             location = geolocator.geocode(country)
-#         except GeocoderTimedOut:
-#             retries -= 1
-#     if location is not None:
-#         latitudes.append(location.latitude)
-#         longitudes.append(location.longitude)
-#     else:
-#         latitudes.append(None)
-#         longitudes.append(None)
-
-# df['Latitude'] = latitudes
-# df['Longitude'] = longitudes    
-    
-    
-
-
 # Create the map
 fig = px.scatter_mapbox(df_geo, lat='Latitude', lon='Longitude', hover_name='Country', hover_data=['Happiness.Rank', 'Happiness.Score'], color='Happiness.Score', size='Economy..GDP.per.Capita.', zoom=1, height=500)
 fig.update_layout(mapbox_style='carto-positron')
@@ -124,41 +89,28 @@ st.title('Happiness Index 2017 Map')
 st.plotly_chart(fig)
 
 
+#new map
+df = pd.read_csv('df_final_geo.csv')
 
-# import geopy
-# import folium
-# from geopy.geocoders import Nominatim
+import folium
+from folium.plugins import MarkerCluster
 
-# # # Load the World Happiness Index data
-# data = pd.read_csv("df_final.csv")
+# Create a map centered on the world
+map_happiness = folium.Map(location=[0, 0], zoom_start=2)
 
-# # Create a title for the dashboard
-# st.title("World Happiness Index Map")
+# Add a marker cluster to the map
+marker_cluster = MarkerCluster().add_to(map_happiness)
 
-# # # Create a geolocator object
-# geolocator = Nominatim(user_agent="streamlit")
+# Add a marker for each country in the dataframe
+for i in range(len(df)):
+    lat = df.loc[i, 'latitude']
+    lon = df.loc[i, 'longitude']
+    country = df.loc[i, 'Country name']
+    score = df.loc[i, 'Ladder score']
+    popup_text = f'{country}<br>Score: {score}'
+    folium.Marker(location=[lat, lon], popup=popup_text).add_to(marker_cluster)
 
-# # # Create a map centered on the world
-# m = folium.Map(location=[0, 0], zoom_start=2)
+# Display the map
+st.write(map_happiness._repr_html_(), unsafe_allow_html=True)
 
-# # # Add a marker for each country in the data
-# for i in data.Country:
-# #      country = data.loc[i, "Country"]
-# #      st.title("country")
-#      location = geolocator.geocode(i)
-#      if location is not None:
-#          lat = location.latitude
-#          lon = location.longitude
-#          score = data["Happiness_Score"]
-#          folium.Marker([lat, lon], popup=f"{i}: {score}").add_to(m)
-       
-# import plotly.express as px
 
-# fig = px.scatter_mapbox(df, lat="latitude", lon="longitude", hover_name='Country', zoom=3)
-
-# fig.update_layout(mapbox_style="open-street-map")
-# fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-# st.plotly_chart(fig)
-
-# # Display the map
-# st.write(m._repr_html_(), unsafe_allow_html=True)
