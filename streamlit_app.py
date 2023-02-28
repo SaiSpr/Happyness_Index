@@ -75,53 +75,53 @@ st.pyplot(fig1)
 
 
 
-from geopy.geocoders import Nominatim
+# from geopy.geocoders import Nominatim
 
-# Load the data
-df = pd.read_csv('df_final.csv')
+# # Load the data
+# df = pd.read_csv('df_final.csv')
+
+# # # Clean and transform the data
+# # geolocator = Nominatim(user_agent="my_app")
+# # latitudes = []
+# # longitudes = []
+# # for country in df['Country']:
+# #     location = geolocator.geocode(country)
+# #     latitudes.append(location.latitude)
+# #     longitudes.append(location.longitude)
+
 
 # # Clean and transform the data
-# geolocator = Nominatim(user_agent="my_app")
+# geolocator = Nominatim(user_agent="my_app", timeout=10)
 # latitudes = []
 # longitudes = []
 # for country in df['Country']:
-#     location = geolocator.geocode(country)
-#     latitudes.append(location.latitude)
-#     longitudes.append(location.longitude)
+#     location = None
+#     retries = 3
+#     while location is None and retries > 0:
+#         try:
+#             location = geolocator.geocode(country)
+#         except GeocoderTimedOut:
+#             retries -= 1
+#     if location is not None:
+#         latitudes.append(location.latitude)
+#         longitudes.append(location.longitude)
+#     else:
+#         latitudes.append(None)
+#         longitudes.append(None)
 
-
-# Clean and transform the data
-geolocator = Nominatim(user_agent="my_app", timeout=10)
-latitudes = []
-longitudes = []
-for country in df['Country']:
-    location = None
-    retries = 3
-    while location is None and retries > 0:
-        try:
-            location = geolocator.geocode(country)
-        except GeocoderTimedOut:
-            retries -= 1
-    if location is not None:
-        latitudes.append(location.latitude)
-        longitudes.append(location.longitude)
-    else:
-        latitudes.append(None)
-        longitudes.append(None)
-
-df['Latitude'] = latitudes
-df['Longitude'] = longitudes    
+# df['Latitude'] = latitudes
+# df['Longitude'] = longitudes    
     
     
 
 
-# Create the map
-fig = px.scatter_mapbox(df, lat='Latitude', lon='Longitude', hover_name='Country', hover_data=['Happiness_Rank', 'Happiness_Score'], color='Happiness_Score', size='Economy', zoom=1, height=500)
-fig.update_layout(mapbox_style='carto-positron')
+# # Create the map
+# fig = px.scatter_mapbox(df, lat='Latitude', lon='Longitude', hover_name='Country', hover_data=['Happiness_Rank', 'Happiness_Score'], color='Happiness_Score', size='Economy', zoom=1, height=500)
+# fig.update_layout(mapbox_style='carto-positron')
 
-# Build the Streamlit app
-st.title('Happiness Index 2017 Map')
-st.plotly_chart(fig)
+# # Build the Streamlit app
+# st.title('Happiness Index 2017 Map')
+# st.plotly_chart(fig)
 
 
 
