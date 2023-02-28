@@ -90,28 +90,28 @@ st.title('Happiness Index 2017 Map')
 st.plotly_chart(fig)
 
 
-#new map
-df = pd.read_csv('df_final_geo.csv')
+# #new map
+# df = pd.read_csv('df_final_geo.csv')
 
-import folium
-from folium.plugins import MarkerCluster
+# import folium
+# from folium.plugins import MarkerCluster
 
-# Create a map centered on the world
-map_happiness = folium.Map(location=[0, 0], zoom_start=2)
+# # Create a map centered on the world
+# map_happiness = folium.Map(location=[0, 0], zoom_start=2)
 
-# Add a marker cluster to the map
-marker_cluster = MarkerCluster().add_to(map_happiness)
+# # Add a marker cluster to the map
+# marker_cluster = MarkerCluster().add_to(map_happiness)
 
-# Add a marker for each country in the dataframe
-for i in range(len(df)):
-    lat = df.loc[i, 'Latitude']
-    lon = df.loc[i, 'Longitude']
-    country = df.loc[i, 'Country']
-    score = df.loc[i, 'Happiness.Score']
-    popup_text = f'{country}<br>Score: {score}'
-    folium.Marker(location=[lat, lon], popup=popup_text).add_to(marker_cluster)
+# # Add a marker for each country in the dataframe
+# for i in range(len(df)):
+#     lat = df.loc[i, 'Latitude']
+#     lon = df.loc[i, 'Longitude']
+#     country = df.loc[i, 'Country']
+#     score = df.loc[i, 'Happiness.Score']
+#     popup_text = f'{country}<br>Score: {score}'
+#     folium.Marker(location=[lat, lon], popup=popup_text).add_to(marker_cluster)
 
-# Display the map
-st.write(map_happiness._repr_html_(), unsafe_allow_html=True)
+# # Display the map
+# st.write(map_happiness._repr_html_(), unsafe_allow_html=True)
 
 
