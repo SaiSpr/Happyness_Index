@@ -78,7 +78,7 @@ st.pyplot(fig1)
 from geopy.geocoders import Nominatim
 
 # Load the data
-df_geo = pd.read_csv('df_final.csv')
+df_geo = pd.read_csv('df_final_geo.csv')
 
 # # # Clean and transform the data
 # # geolocator = Nominatim(user_agent="my_app")
