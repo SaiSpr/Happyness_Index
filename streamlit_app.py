@@ -26,7 +26,7 @@ if select =="All":
 else:   
     filtered_df = df[df['Region']==select]
 
-score = st.sidebar.slider('Select min Happiness Score', min_value=5, max_value=10, value = 10) # Getting the input.
+score = st.sidebar.slider('Select min Happiness Score', min_value=0, max_value=10, value = 2) # Getting the input.
 df = df[df['Happiness_Score'] <= score] # Filtering the dataframe.
 
 
