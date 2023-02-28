@@ -103,10 +103,10 @@ marker_cluster = MarkerCluster().add_to(map_happiness)
 
 # Add a marker for each country in the dataframe
 for i in range(len(df)):
-    lat = df.loc[i, 'latitude']
-    lon = df.loc[i, 'longitude']
-    country = df.loc[i, 'Country name']
-    score = df.loc[i, 'Ladder score']
+    lat = df.loc[i, 'Latitude']
+    lon = df.loc[i, 'Longitude']
+    country = df.loc[i, 'Country']
+    score = df.loc[i, 'Happiness.Score']
     popup_text = f'{country}<br>Score: {score}'
     folium.Marker(location=[lat, lon], popup=popup_text).add_to(marker_cluster)
 
