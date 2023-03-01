@@ -89,5 +89,7 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 st.title('Happiness Index 2017 Map')
 st.plotly_chart(fig)
 
-st.image("ols.jpg", caption='World Happiness Report')
+
+st.title('Model Summary')
+st.image("ols.jpg", caption='Result Summary')
 
